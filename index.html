@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sepia.land</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --turq:       #5bbcb8;
+  --turq-deep:  #2e8f8a;
+  --turq-light: #a8dedd;
+  --terra:      #c85a3a;
+  --terra-l:    #e07a5a;
+  --stone:      #c8b89a;
+  --stone-l:    #ede5d8;
+  --olive:      #7a8c5a;
+  --olive-l:    #b5be9e;
+  --sun:        #e8c44a;
+  --cream:      #f7f2ea;
+  --dark:       #1e1812;
+  --text:       #3a2c1e;
+  --muted:      #8a7a68;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* GRAIN */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ===================== NAV ===================== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(247,242,234,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,184,154,0.3);
+  transition: all 0.3s ease;
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.7rem;
+  color: var(--dark);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--turq);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--turq-deep); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ===================== HERO ===================== */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+  overflow: hidden;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 64px 80px 80px;
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--turq-deep);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--turq);
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(3.5rem, 5.5vw, 5.5rem);
+  line-height: 1.05;
+  color: var(--dark);
+  margin-bottom: 32px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.hero-bio {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 380px;
+  margin-bottom: 48px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.btn-primary {
+  padding: 14px 32px;
+  background: var(--turq-deep);
+  color: var(--cream);
+  border: none;
+  border-radius: 40px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(46,143,138,0.3);
+}
+
+.btn-primary:hover {
+  background: var(--turq);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(46,143,138,0.4);
+}
+
+.btn-ghost {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+
+.btn-ghost:hover { color: var(--terra); }
+
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative color blocks in hero */
+.hero-bg-block {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--turq-light) 0%, var(--stone-l) 50%, var(--olive-l) 100%);
+}
+
+.hero-overlay-cards {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+}
+
+.hero-card-stack {
+  position: relative;
+  width: 280px;
+  height: 380px;
+}
+
+.hero-card {
+  position: absolute;
+  width: 220px;
+  height: 300px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(30,24,18,0.2);
+  overflow: hidden;
+}
+
+.hero-card-1 {
+  background: linear-gradient(160deg, var(--turq) 0%, var(--turq-deep) 100%);
+  top: 0; left: 0;
+  transform: rotate(-6deg);
+}
+
+.hero-card-2 {
+  background: linear-gradient(160deg, var(--terra-l) 0%, var(--terra) 100%);
+  top: 40px; left: 60px;
+  transform: rotate(2deg);
+}
+
+.hero-card-3 {
+  background: linear-gradient(160deg, var(--stone-l) 0%, var(--stone) 100%);
+  top: 20px; left: 30px;
+  transform: rotate(-2deg);
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+}
+
+.card-inner-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--dark);
+  line-height: 1.4;
+  opacity: 0.7;
+}
+
+/* Floating color dots */
+.dot-decor {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+/* ===================== COLOR STRIP ===================== */
+.color-strip {
+  height: 5px;
+  display: flex;
+}
+.color-strip span { flex: 1; }
+
+/* ===================== SECTIONS ===================== */
+.section {
+  padding: 100px 80px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+}
+
+.section-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--turq-deep);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  color: var(--dark);
+  line-height: 1.15;
+}
+
+.section-title em { font-style: italic; color: var(--terra); }
+
+.see-all {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.see-all:hover { color: var(--turq-deep); }
+
+/* ===================== BLOG GRID ===================== */
+.blog-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+}
+
+.blog-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 20px rgba(30,24,18,0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(30,24,18,0.14);
+}
+
+.blog-card-img {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-card.featured .blog-card-img { height: 280px; }
+
+.blog-card-img-inner {
+  width: 100%; height: 100%;
+  transition: transform 0.5s ease;
+}
+.blog-card:hover .blog-card-img-inner { transform: scale(1.05); }
+
+.blog-card-body {
+  padding: 24px 22px;
+}
+
+.blog-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.tag-kitap  { background: rgba(200,90,58,0.12); color: var(--terra); }
+.tag-yoga   { background: rgba(91,188,184,0.15); color: var(--turq-deep); }
+.tag-doga   { background: rgba(122,140,90,0.15); color: var(--olive); }
+
+.blog-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.blog-card.featured .blog-card-title { font-size: 1.6rem; }
+
+.blog-card-excerpt {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.blog-card-date {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--stone);
+  text-transform: uppercase;
+}
+
+/* ===================== ABOUT STRIP ===================== */
+.about-strip {
+  background: linear-gradient(135deg, var(--turq-deep) 0%, var(--turq) 40%, var(--olive) 100%);
+  padding: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-strip::before {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  top: -150px; right: -100px;
+}
+
+.about-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(2rem, 3vw, 3rem);
+  color: white;
+  line-height: 1.3;
+  font-weight: 300;
+}
+
+.about-quote span {
+  display: block;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-family: 'Jost', sans-serif;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-top: 20px;
+}
+
+.about-text {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.92rem;
+  line-height: 1.9;
+}
+
+.about-text p { margin-bottom: 16px; }
+
+.about-text strong {
+  color: var(--sun);
+  font-weight: 400;
+}
+
+/* ===================== BOOKS SECTION ===================== */
+.books-section {
+  background: var(--stone-l);
+}
+
+.books-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scrollbar-width: none;
+}
+.books-row::-webkit-scrollbar { display: none; }
+
+.book-card {
+  flex-shrink: 0;
+  width: 180px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.book-card:hover { transform: translateY(-8px); }
+
+.book-spine {
+  width: 180px;
+  height: 240px;
+  border-radius: 6px 12px 12px 6px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: flex-end;
+  padding: 18px;
+  box-shadow: -4px 6px 20px rgba(30,24,18,0.2), inset -3px 0 8px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.book-spine::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 20px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 6px 0 0 6px;
+}
+
+.book-title-overlay {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+}
+
+.book-info { padding: 0 4px; }
+
+.book-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.book-author {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.book-rating {
+  display: flex;
+  gap: 2px;
+  margin-top: 6px;
+}
+.star { color: var(--sun); font-size: 0.65rem; }
+
+/* ===================== YOGA SECTION ===================== */
+.yoga-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.yoga-card {
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.yoga-card-img {
+  height: 260px;
+  transition: transform 0.5s ease;
+}
+.yoga-card:hover .yoga-card-img { transform: scale(1.06); }
+
+.yoga-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(30,24,18,0.7) 0%, transparent 50%);
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.yoga-card-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: white;
+  line-height: 1.3;
+}
+
+/* ===================== GALLERY ===================== */
+.gallery-section { background: var(--dark); }
+.gallery-section .section-label { color: var(--turq-light); }
+.gallery-section .section-title { color: white; }
+.gallery-section .section-title em { color: var(--terra-l); }
+.gallery-section .see-all { color: rgba(255,255,255,0.4); }
+.gallery-section .see-all:hover { color: var(--turq-light); }
+
+.gallery-masonry {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 160px 160px;
+  gap: 10px;
+}
+
+.gallery-item {
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+.gallery-item:hover { opacity: 0.85; }
+
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery-item:nth-child(4) { grid-column: span 2; }
+
+.gallery-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* ===================== FOOTER ===================== */
+footer {
+  background: var(--dark);
+  padding: 64px 80px 40px;
+  border-top: 1px solid rgba(200,184,154,0.15);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.footer-desc {
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.4);
+  max-width: 260px;
+}
+
+.footer-col-title {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--turq-light);
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: white; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.08em;
+}
+
+.footer-social {
+  display: flex;
+  gap: 16px;
+}
+
+.social-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0;
+}
+.social-dot:hover {
+  border-color: var(--turq);
+  color: var(--turq);
+}
+
+/* ===================== ANIMATIONS ===================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(-6deg); }
+  50%       { transform: translateY(-12px) rotate(-6deg); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px) rotate(2deg); }
+  50%       { transform: translateY(-8px) rotate(2deg); }
+}
+
+.hero-left > * {
+  animation: fadeUp 0.8s ease both;
+}
+.hero-eyebrow  { animation-delay: 0.1s; }
+.hero-title    { animation-delay: 0.25s; }
+.hero-bio      { animation-delay: 0.4s; }
+.hero-actions  { animation-delay: 0.55s; }
+
+.hero-card-1 { animation: float  4s ease-in-out infinite; }
+.hero-card-2 { animation: float2 5s ease-in-out infinite 0.5s; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { gap: 20px; }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 100px 24px 48px; }
+  .hero-right { height: 320px; }
+  .section { padding: 64px 24px; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .about-strip { grid-template-columns: 1fr; padding: 48px 24px; gap: 32px; }
+  .yoga-grid { grid-template-columns: repeat(2,1fr); }
+  .gallery-masonry { grid-template-columns: repeat(3,1fr); grid-template-rows: auto; }
+  .gallery-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+  .gallery-item:nth-child(4) { grid-column: span 1; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  footer { padding: 48px 24px 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- COLOR STRIP -->
+<div class="color-strip">
+  <span style="background:var(--turq);"></span>
+  <span style="background:var(--terra);"></span>
+  <span style="background:var(--stone);"></span>
+  <span style="background:var(--olive);"></span>
+  <span style="background:var(--sun);"></span>
+  <span style="background:var(--turq-deep);"></span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">sepia.land</a>
+  <ul class="nav-links">
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#kitaplar">Kitaplar</a></li>
+    <li><a href="#yoga">Yoga</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#hakkimda">Hakkımda</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Akdeniz ruhlu bir köşe</div>
+    <h1 class="hero-title">
+      oku.<br>
+      nefes al.<br>
+      <em>tekrarla.</em>
+    </h1>
+    <p class="hero-bio">
+      Kitaplar, yoga matı ve doğa arasında bir yaşam. Burada her şey yavaş, her şey kasıtlı — ve her şey biraz deniz kokar.
+    </p>
+    <div class="hero-actions">
+      <a href="#blog" class="btn-primary">Keşfet</a>
+      <a href="#hakkimda" class="btn-ghost">Hakkımda →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-bg-block"></div>
+
+    <!-- Floating color dots -->
+    <div class="dot-decor" style="width:120px;height:120px;background:var(--terra);top:10%;right:8%;"></div>
+    <div class="dot-decor" style="width:60px;height:60px;background:var(--sun);top:55%;right:20%;"></div>
+    <div class="dot-decor" style="width:40px;height:40px;background:var(--olive);bottom:15%;left:12%;"></div>
+
+    <div class="hero-overlay-cards">
+      <div class="hero-card-stack">
+        <div class="hero-card hero-card-1"
+             style="background:linear-gradient(160deg,var(--turq) 0%,var(--turq-deep) 100%);">
+        </div>
+        <div class="hero-card hero-card-2"
+             style="background:linear-gradient(160deg,var(--terra-l) 0%,var(--terra) 100%);">
+        </div>
+        <div class="hero-card hero-card-3"
+             style="background:linear-gradient(160deg,var(--stone-l) 0%,var(--stone) 100%);">
+          <div class="card-inner-text">"bugün bir sayfa bile yeter."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="section" id="blog">
+  <div class="section-header">
+    <div>
+      <div class="section-label">02 — Yazılar</div>
+      <h2 class="section-title">Son <em>notlar</em></h2>
+    </div>
+    <a href="#" class="see-all">Tümü →</a>
+  </div>
+
+  <div class="blog-grid">
+    <!-- Featured -->
+    <div class="blog-card featured">
+      <div class="blog-card-img">
+        <div class="blog-card-img-inner" style="background:linear-gradient(135deg,var(--turq-light),var(--olive-l),var(--stone-l));width:100%;height:100%;"></div>
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-tag tag-kitap">Kitap</span>
+        <div class="blog-card-title">Bir kitabı yavaş okumak üzerine — sabırsızlığa karşı sayfa sabırsızlığı</div>
+        <p class="blog-card-excerpt">Her şeyin hızlandığı bir dünyada, bir kitabı yavaşça bitirmenin ne anlama geldiğini düşündüm...</p>
+        <div class="blog-card-date">8 Mart 2025</div>
+      </div>
+    </div>
+
+    <!-- Small cards -->
+    <div class="blog-card">
+      <div class="blog-card-img">
+        <div class="blog-card-img-inner" style="background:linear-gradient(135deg,var(--turq),var(--turq-deep));width:100%;height:100%;"></div>
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-tag tag-yoga">Yoga</span>
+        <div class="blog-card-title">Sabah rutini: mat, nefes, beş dakika</div>
+        <div class="blog-card-date">2 Mart 2025</div>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-card-img">
+        <div class="blog-card-img-inner" style="background:linear-gradient(135deg,var(--olive-l),var(--olive));width:100%;height:100%;"></div>
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-tag tag-doga">Doğa</span>
+        <div class="blog-card-title">Ormanda yürümek neden iyi hissettiriyor?</div>
+        <div class="blog-card-date">24 Şubat 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<section class="about-strip" id="hakkimda">
+  <div class="about-quote">
+    "Kitaplar ve doğa arasında,<br>kendimi bulduğum yerler."
+    <span>— sepia.land hakkında</span>
+  </div>
+  <div class="about-text">
+    <p>Çevre mühendisi olarak <strong>doğayı koruma</strong> üzerine çalışırken, boş zamanlarımda kitapların ve yoga matının bana verdiği huzuru paylaşmak istedim.</p>
+    <p>Bu blog; okuduğum kitaplar, pratiğimi bulduğum yoga anları ve doğayla kurduğum bağ üzerine. Yüzümü göstermiyorum ama hissimi gösteriyorum.</p>
+  </div>
+</section>
+
+<!-- BOOKS -->
+<section class="section books-section" id="kitaplar">
+  <div class="section-header">
+    <div>
+      <div class="section-label">03 — Kitaplık</div>
+      <h2 class="section-title">Son <em>okunanlar</em></h2>
+    </div>
+    <a href="#" class="see-all">Tüm kitaplar →</a>
+  </div>
+
+  <div class="books-row">
+    <div class="book-card">
+      <div class="book-spine" style="background:linear-gradient(160deg,var(--turq-deep),var(--turq));">
+        <div class="book-title-overlay">Siddhartha</div>
+      </div>
+      <div class="book-info">
+        <div class="book-name">Siddhartha</div>
+        <div class="book-author">Hermann Hesse</div>
+        <div class="book-rating"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-spine" style="background:linear-gradient(160deg,var(--terra),var(--terra-l));">
+        <div class="book-title-overlay">Bülbülü Öldürmek</div>
+      </div>
+      <div class="book-info">
+        <div class="book-name">Bülbülü Öldürmek</div>
+        <div class="book-author">Harper Lee</div>
+        <div class="book-rating"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-spine" style="background:linear-gradient(160deg,var(--olive),var(--olive-l));">
+        <div class="book-title-overlay">Küçük Prens</div>
+      </div>
+      <div class="book-info">
+        <div class="book-name">Küçük Prens</div>
+        <div class="book-author">Antoine de Saint-Exupéry</div>
+        <div class="book-rating"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-spine" style="background:linear-gradient(160deg,var(--stone),var(--stone-l)); ">
+        <div class="book-title-overlay" style="color:var(--dark);">Deniz Feneri</div>
+      </div>
+      <div class="book-info">
+        <div class="book-name">Deniz Feneri</div>
+        <div class="book-author">Virginia Woolf</div>
+        <div class="book-rating"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-spine" style="background:linear-gradient(160deg,#5a4a8a,#8a6aba);">
+        <div class="book-title-overlay">Yüzyıllık Yalnızlık</div>
+      </div>
+      <div class="book-info">
+        <div class="book-name">Yüzyıllık Yalnızlık</div>
+        <div class="book-author">Gabriel García Márquez</div>
+        <div class="book-rating"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YOGA -->
+<section class="section" id="yoga">
+  <div class="section-header">
+    <div>
+      <div class="section-label">04 — Hareket</div>
+      <h2 class="section-title">Yoga & <em>pilates</em></h2>
+    </div>
+    <a href="#" class="see-all">Tümü →</a>
+  </div>
+
+  <div class="yoga-grid">
+    <div class="yoga-card">
+      <div class="yoga-card-img" style="background:linear-gradient(160deg,var(--turq-light),var(--turq-deep));height:260px;"></div>
+      <div class="yoga-card-overlay">
+        <div class="yoga-card-label">Sabah akışı<br><small style="font-size:0.7rem;opacity:0.7;">15 dakika</small></div>
+      </div>
+    </div>
+    <div class="yoga-card">
+      <div class="yoga-card-img" style="background:linear-gradient(160deg,var(--olive-l),var(--olive));height:260px;"></div>
+      <div class="yoga-card-overlay">
+        <div class="yoga-card-label">Nefes çalışması<br><small style="font-size:0.7rem;opacity:0.7;">10 dakika</small></div>
+      </div>
+    </div>
+    <div class="yoga-card">
+      <div class="yoga-card-img" style="background:linear-gradient(160deg,var(--stone-l),var(--stone));height:260px;"></div>
+      <div class="yoga-card-overlay">
+        <div class="yoga-card-label">Pilates core<br><small style="font-size:0.7rem;opacity:0.7;">20 dakika</small></div>
+      </div>
+    </div>
+    <div class="yoga-card">
+      <div class="yoga-card-img" style="background:linear-gradient(160deg,var(--terra-l),var(--terra));height:260px;"></div>
+      <div class="yoga-card-overlay">
+        <div class="yoga-card-label">Akşam germe<br><small style="font-size:0.7rem;opacity:0.7;">12 dakika</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section gallery-section" id="galeri">
+  <div class="section-header">
+    <div>
+      <div class="section-label">05 — Anlar</div>
+      <h2 class="section-title">Fotoğraf <em>galerisi</em></h2>
+    </div>
+    <a href="#" class="see-all">Tümü →</a>
+  </div>
+
+  <div class="gallery-masonry">
+    <div class="gallery-item">
+      <div style="background:linear-gradient(135deg,var(--turq),var(--turq-deep));width:100%;height:100%;min-height:200px;"></div>
+    </div>
+    <div class="gallery-item">
+      <div style="background:linear-gradient(135deg,var(--terra-l),var(--terra));width:100%;height:100%;"></div>
+    </div>
+    <div class="gallery-item">
+      <div style="background:linear-gradient(135deg,var(--olive-l),var(--olive));width:100%;height:100%;"></div>
+    </div>
+    <div class="gallery-item">
+      <div style="background:linear-gradient(135deg,var(--sun),var(--terra-l));width:100%;height:100%;"></div>
+    </div>
+    <div class="gallery-item">
+      <div style="background:linear-gradient(135deg,var(--stone-l),var(--stone));width:100%;height:100%;"></div>
+    </div>
+    <div class="gallery-item">
+      <div style="background:linear-gradient(135deg,var(--turq-light),var(--olive-l));width:100%;height:100%;"></div>
+    </div>
+    <div class="gallery-item">
+      <div style="background:linear-gradient(135deg,var(--terra),#8a4a6a);width:100%;height:100%;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">sepia.land</div>
+      <p class="footer-desc">Kitaplar, yoga ve doğa arasında bir köşe. Yavaş, kasıtlı, samimi.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Sayfalar</div>
+      <ul class="footer-links">
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Kitaplar</a></li>
+        <li><a href="#">Yoga</a></li>
+        <li><a href="#">Galeri</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kategoriler</div>
+      <ul class="footer-links">
+        <li><a href="#">Kitap İncelemeleri</a></li>
+        <li><a href="#">Yoga Rutinleri</a></li>
+        <li><a href="#">Doğa Notları</a></li>
+        <li><a href="#">Akdeniz</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Bağlantı</div>
+      <ul class="footer-links">
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Pinterest</a></li>
+        <li><a href="#">İletişim</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 sepia.land — oku · nefes al · tekrarla</div>
+    <div class="footer-social">
+      <a href="#" class="social-dot">ig</a>
+      <a href="#" class="social-dot">pt</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
