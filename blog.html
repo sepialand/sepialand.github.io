@@ -325,6 +325,48 @@ footer {
   }
   .nav-links.open { display: flex; }
 }
+
+@media (max-width: 768px) {
+  /* GENEL PADDING */
+  .page-header { padding: 48px 24px 36px; }
+  .filters { padding: 20px 24px; flex-wrap: wrap; }
+  
+  /* BLOG / KİTAP / YOGA GRİD */
+  .blog-grid, .books-grid, .yoga-grid { grid-template-columns: 1fr !important; }
+  .blog-card.featured { grid-column: span 1 !important; }
+  .yoga-card.large { grid-column: span 1 !important; }
+  .books-section, .yoga-section, .blog-section, .gallery-section { padding: 36px 24px 60px; }
+
+  /* GALERİ MOZAİK */
+  .masonry { columns: 2; column-gap: 12px; }
+  .masonry-item { margin-bottom: 12px; }
+
+  /* ALINTI ŞERİDİ */
+  .quote-strip { padding: 48px 24px; }
+
+  /* FOOTER */
+  .footer-top { grid-template-columns: 1fr 1fr !important; gap: 28px; }
+  footer { padding: 48px 24px 32px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+
+  /* HERO */
+  .hero { grid-template-columns: 1fr !important; min-height: auto !important; }
+  .hero-left { padding: 48px 24px 36px !important; }
+  .hero-right { display: none; }
+  .hero-title { font-size: 3rem !important; }
+
+  /* SECTIONS */
+  .section { padding: 48px 24px !important; }
+  .section-header { padding: 0 0 32px !important; }
+  .cards-grid { grid-template-columns: 1fr !important; }
+  .featured-card { grid-column: span 1 !important; flex-direction: column !important; }
+  .featured-img { width: 100% !important; height: 220px !important; }
+}
+
+@media (max-width: 480px) {
+  .masonry { columns: 1; }
+  .footer-top { grid-template-columns: 1fr !important; }
+}
 </style>
 </head>
 <body>
