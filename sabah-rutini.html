@@ -215,13 +215,30 @@ footer { background: var(--dark); color: var(--stone-l); padding: 64px 80px 40px
 
 <div class="post-cover">
   <div style="position:relative;width:100%;padding-bottom:56.25%;border-radius:20px;overflow:hidden;box-shadow:0 16px 48px rgba(30,24,18,0.15);">
-    <iframe 
-      src="https://www.youtube.com/embed/gELj_zdY2fc?autoplay=1&mute=1&loop=1&playlist=gELj_zdY2fc&controls=0&showinfo=0&rel=0"
+    <iframe id="yt-video"
+      src="https://www.youtube.com/embed/gELj_zdY2fc?autoplay=1&mute=1&loop=1&playlist=gELj_zdY2fc&controls=0&showinfo=0&rel=0&enablejsapi=1"
       style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
       allow="autoplay; encrypted-media"
       allowfullscreen>
     </iframe>
+    <button onclick="toggleMute()" id="mute-btn" style="position:absolute;bottom:16px;right:16px;background:rgba(247,242,234,0.85);border:none;border-radius:40px;padding:8px 16px;font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#3a2c1e;cursor:pointer;backdrop-filter:blur(8px);">🔇 ses aç</button>
   </div>
+  <script>
+    var muted = true;
+    var iframe = document.getElementById('yt-video');
+    function toggleMute() {
+      var btn = document.getElementById('mute-btn');
+      if (muted) {
+        iframe.src = iframe.src.replace('mute=1', 'mute=0');
+        btn.innerHTML = '🔊 ses kapat';
+        muted = false;
+      } else {
+        iframe.src = iframe.src.replace('mute=0', 'mute=1');
+        btn.innerHTML = '🔇 ses aç';
+        muted = true;
+      }
+    }
+  </script>
 </div>
 
 <div class="post-content">
